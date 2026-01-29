@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -320,7 +321,11 @@ fun StepperRow(
         ) {
             FilledTonalIconButton(
                 onClick = { if (value > 0) onValueChange(value - 1) },
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier.size(40.dp),
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             ) {
                 Icon(Icons.Default.Remove, contentDescription = "Decrease")
             }
@@ -347,7 +352,11 @@ fun StepperRow(
 
             FilledTonalIconButton(
                 onClick = { onValueChange(value + 1) },
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier.size(40.dp),
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Increase")
             }
@@ -381,7 +390,7 @@ fun SegmentedEnumSelector(
     selectedOptionIndex: Int,
     onOptionSelected: (Int) -> Unit
 ) {
-    // Correctly mapped to your Theme
+
     val selectedColor = MaterialTheme.colorScheme.primary
     val unselectedColor = MaterialTheme.colorScheme.surfaceVariant
     val selectedTextColor = MaterialTheme.colorScheme.onPrimary

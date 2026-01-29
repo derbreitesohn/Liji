@@ -187,12 +187,12 @@ fun ClosetGrid(
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (isTopSelected)
-                                MaterialTheme.colorScheme.primary
+                                MaterialTheme.colorScheme.secondary
                             else
                                 MaterialTheme.colorScheme.surfaceVariant,
 
                             contentColor = if (isTopSelected)
-                                MaterialTheme.colorScheme.onPrimary
+                                MaterialTheme.colorScheme.onSecondary
                             else
                                 MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -208,12 +208,12 @@ fun ClosetGrid(
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (isBottomSelected)
-                                MaterialTheme.colorScheme.primary
+                                MaterialTheme.colorScheme.secondary
                             else
                                 MaterialTheme.colorScheme.surfaceVariant,
 
                             contentColor = if (isBottomSelected)
-                                MaterialTheme.colorScheme.onPrimary
+                                MaterialTheme.colorScheme.onSecondary
                             else
                                 MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -228,12 +228,12 @@ fun ClosetGrid(
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (isShoesSelected)
-                                MaterialTheme.colorScheme.primary
+                                MaterialTheme.colorScheme.secondary
                             else
                                 MaterialTheme.colorScheme.surfaceVariant,
 
                             contentColor = if (isShoesSelected)
-                                MaterialTheme.colorScheme.onPrimary
+                                MaterialTheme.colorScheme.onSecondary
                             else
                                 MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -249,12 +249,12 @@ fun ClosetGrid(
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (isOuterwearSelected)
-                                MaterialTheme.colorScheme.primary
+                                MaterialTheme.colorScheme.secondary
                             else
                                 MaterialTheme.colorScheme.surfaceVariant,
 
                             contentColor = if (isOuterwearSelected)
-                                MaterialTheme.colorScheme.onPrimary
+                                MaterialTheme.colorScheme.onSecondary
                             else
                                 MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -269,12 +269,12 @@ fun ClosetGrid(
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (isOne_PieceSelected)
-                                MaterialTheme.colorScheme.primary
+                                MaterialTheme.colorScheme.secondary
                             else
                                 MaterialTheme.colorScheme.surfaceVariant,
 
                             contentColor = if (isOne_PieceSelected)
-                                MaterialTheme.colorScheme.onPrimary
+                                MaterialTheme.colorScheme.onSecondary
                             else
                                 MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -289,12 +289,12 @@ fun ClosetGrid(
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (isAccessorySelected)
-                                MaterialTheme.colorScheme.primary
+                                MaterialTheme.colorScheme.secondary
                             else
                                 MaterialTheme.colorScheme.surfaceVariant,
 
                             contentColor = if (isAccessorySelected)
-                                MaterialTheme.colorScheme.onPrimary
+                                MaterialTheme.colorScheme.onSecondary
                             else
                                 MaterialTheme.colorScheme.onSurfaceVariant
                         )

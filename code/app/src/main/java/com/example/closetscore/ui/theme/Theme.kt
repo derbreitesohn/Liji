@@ -12,26 +12,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    // In Dark Mode, we use the lighter green so it pops against the dark background
+
     primary = LightGreen,
-    onPrimary = Green, // Text on the primary button looks best in the dark green
+    onPrimary = Green,
     primaryContainer = Green,
     onPrimaryContainer = LightGreen,
 
-    // Berry Red for secondary actions
+
     secondary = BrandRed,
     onSecondary = White,
 
-    // Orange for small accents (like Floating Action Buttons or Toggles)
+
     tertiary = BrandOrange,
 
-    // Backgrounds using your Greys
+
     background = Black,
-    surface = DarkestGrey, // Cards/Sheets use your DarkestGrey
-    onBackground = Grey,   // Text is your Light Grey
+    surface = DarkestGrey,
+    onBackground = Grey,
     onSurface = White,
 
-    // Standard error
+
     error = BrandRed
 )
 
@@ -41,23 +41,23 @@ private val LightColorScheme = lightColorScheme(
     primaryContainer = Grey,
     onPrimaryContainer = Green,
 
-    // Berry Red adds a nice "Fashion" contrast to the Green
+
     secondary = BrandRed,
     onSecondary = White,
 
-    // Orange for standout elements
+
     tertiary = BrandOrange,
     onTertiary = White,
 
-    // Backgrounds
-    background = White,
-    surface = White,       // Cards are white
-    surfaceVariant = Grey, // Text fields or dividers use your Light Grey
 
-    // Text Colors
+    background = White,
+    surface = White,
+    surfaceVariant = Grey,
+
+
     onBackground = Black,
-    onSurface = DarkestGrey, // Main text is your DarkestGrey (easier on eyes than Black)
-    onSurfaceVariant = DarkGrey, // Subtitles are your Medium Grey
+    onSurface = DarkestGrey,
+    onSurfaceVariant = DarkGrey,
 )
 
 @Composable

@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 fun StatsTag(
     count: String,
     label: String,
-    icon: ImageVector // Icon is now required
+    icon: ImageVector
 ) {
     Card(
         elevation = CardDefaults.cardElevation(4.dp),
