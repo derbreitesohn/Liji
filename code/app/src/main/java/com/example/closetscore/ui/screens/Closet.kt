@@ -54,7 +54,7 @@ enum class SortOption {
 }
 
 @Composable
-fun ClosetScreen(navController: NavController, text: String) {
+fun ClosetScreen(navController: NavController, text: String, paddingValues: PaddingValues) {
     val viewModel: ItemViewModel = viewModel(factory = AppViewModelProvider.Factory)
     ClosetGrid(navController, viewModel)
 }

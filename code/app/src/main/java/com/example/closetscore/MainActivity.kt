@@ -11,7 +11,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -80,7 +79,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     Navigation(
                         navController = navController,
-                        modifier = Modifier.padding(innerPadding)
+                        paddingValues = innerPadding
                     )
                 }
             }

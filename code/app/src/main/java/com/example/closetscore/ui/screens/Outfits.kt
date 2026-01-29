@@ -39,7 +39,8 @@ import com.example.closetscore.ui.viewmodels.TemplateViewModel
 @Composable
 fun OutfitsScreen(
     navController: NavController,
-    templateViewModel: TemplateViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    templateViewModel: TemplateViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    paddingValues: PaddingValues
 ) {
     val templatesList by templateViewModel.templatesWithItems.collectAsState()
 

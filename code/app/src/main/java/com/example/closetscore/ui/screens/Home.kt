@@ -26,7 +26,12 @@ import com.example.closetscore.ui.viewmodel.ItemViewModel
 import com.example.closetscore.ui.viewmodel.ScoreViewModel
 
 @Composable
-fun HomeScreen(navController: NavController, itemViewModel: ItemViewModel = viewModel(factory = AppViewModelProvider.Factory), scoreViewModel: ScoreViewModel= viewModel(factory = AppViewModelProvider.Factory)) {
+fun HomeScreen(
+    navController: NavController,
+    itemViewModel: ItemViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    scoreViewModel: ScoreViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    paddingValues: PaddingValues
+) {
     val itemsList by itemViewModel.repository.items.collectAsState(initial = emptyList())
     val currentScore by scoreViewModel.score.collectAsState()
     ItemGrid(navController, itemsList, currentScore)
