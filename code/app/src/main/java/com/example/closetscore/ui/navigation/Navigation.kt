@@ -1,9 +1,8 @@
 package com.example.closetscore.ui.navigation
 
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -19,12 +18,11 @@ import com.example.closetscore.ui.screens.OutfitsScreen
 import com.example.closetscore.ui.screens.StatsScreen
 import com.example.closetscore.ui.screens.TemplateCreateScreen
 import com.example.closetscore.ui.screens.TemplateDetailScreen
-import com.example.closetscore.ui.viewmodel.ItemViewModel
-import com.example.closetscore.ui.viewmodel.ScoreViewModel
 
 @Composable
 fun Navigation(
     navController: NavHostController,
+    paddingValues: PaddingValues,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -33,19 +31,19 @@ fun Navigation(
         modifier = modifier
     ){
         composable(Screen.Home.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, paddingValues = paddingValues)
         }
 
         composable(Screen.Closet.route) {
-            ClosetScreen(navController = navController, "Closet / Wardrobe Screen")
+            ClosetScreen(navController = navController, "Closet / Wardrobe Screen", paddingValues = paddingValues)
         }
 
         composable(Screen.Outfits.route) {
-            OutfitsScreen(navController = navController)
+            OutfitsScreen(navController = navController,paddingValues = paddingValues)
         }
 
         composable(Screen.Stats.route) {
-            StatsScreen()
+            StatsScreen(paddingValues = paddingValues)
         }
 
         composable(Screen.Create.route) {

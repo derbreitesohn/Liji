@@ -79,12 +79,12 @@ class ScoreViewModel(repository: ItemRepository) : ViewModel() {
             val otherCount = activeItems.count { it.category == ItemCategory.Other }
 
             listOf(
-                Pie(label = "Tops", data = (topsCount / total) * 100, color = Color(0xFF22C55E)),      // Grün
-                Pie(label = "Bottoms", data = (bottomsCount / total) * 100, color = Color(0xFF3B82F6)),   // Blau
-                Pie(label = "Shoes", data = (shoesCount / total) * 100, color = Color(0xFFEC4899)),     // Pink
-                Pie(label = "Outerwear", data = (outerwearCount / total) * 100, color = Color(0xFF8B5CF6)), // Lila (Neu)
-                Pie(label = "Accessory", data = (accessoryCount / total) * 100, color = Color(0xFFF97316)), // Orange (Neu)
-                Pie(label = "Other", data = (otherCount / total) * 100, color = Color(0xFF9CA3AF)),     // Grau (Neu)
+                Pie(label = "Tops", data = (topsCount / total) * 100, color = Color(0xFF22C55E)),
+                Pie(label = "Bottoms", data = (bottomsCount / total) * 100, color = Color(0xFF3B82F6)),
+                Pie(label = "Shoes", data = (shoesCount / total) * 100, color = Color(0xFFEC4899)),
+                Pie(label = "Outerwear", data = (outerwearCount / total) * 100, color = Color(0xFF8B5CF6)),
+                Pie(label = "Accessory", data = (accessoryCount / total) * 100, color = Color(0xFFF97316)),
+                Pie(label = "Other", data = (otherCount / total) * 100, color = Color(0xFF9CA3AF)),
             ).filter { it.data > 0.0 }
         }
         .stateIn(
@@ -98,10 +98,10 @@ class ScoreViewModel(repository: ItemRepository) : ViewModel() {
 
             buckets.map { bucket ->
                 val color = when(bucket.label) {
-                    "0" -> Color(0xFFFF9B9B) // Red
-                    "1-5" -> Color(0xFFFFD750) // Yellow
-                    "6-15", "16-30" -> Color(0xFF6CE590) // GreenLight
-                    else -> Color(0xFF22C55E) // Green
+                    "0" -> Color(0xFFFF9B9B)
+                    "1-5" -> Color(0xFFFFD750)
+                    "6-15", "16-30" -> Color(0xFF6CE590)
+                    else -> Color(0xFF22C55E)
                 }
 
                 Bars(

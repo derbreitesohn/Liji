@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liji - Project Documentation</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
     <style>
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
@@ -91,6 +97,49 @@
             </div>
         </section>
 
+        <section class="mb-20 border-t border-black pt-8">
+            <h2 class="text-sm font-bold uppercase tracking-widest mb-6">Database Design</h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+                Liji uses a local SQLite database to ensure offline-first functionality. The schema below highlights the relationship between Items and Templates (Outfits).
+            </p>
+            <div class="w-full flex justify-center border border-gray-200 rounded-lg p-6 overflow-x-auto bg-gray-50">
+                <div class="mermaid">
+                    erDiagram
+                        ITEM {
+                            int id PK
+                            string name
+                            string photoUri
+                            string brandName
+                            string brandType
+                            string material
+                            string category
+                            double price
+                            boolean isSecondHand
+                            int wearCount
+                            LocalDate dateAcquired
+                            string status
+                        }
+                    
+                        TEMPLATE {
+                            int id PK
+                            string name
+                            LocalDate date
+                            int wearCount
+                            string status
+                        }
+                    
+                        %% Junction Table representing TemplateItemCrossRef
+                        TEMPLATE_ITEM_CROSS_REF {
+                            int templateId FK
+                            int itemId FK
+                        }
+                    
+                        TEMPLATE ||--o{ TEMPLATE_ITEM_CROSS_REF : "contains"
+                        ITEM ||--o{ TEMPLATE_ITEM_CROSS_REF : "belongs to"
+                </div>
+            </div>
+        </section>
+
         <section class="imag mb-20">
             <img src="./images/closet detail.png" alt="Closet Detail">
             <img src="./images/start screen.png" alt="Start Screen">
@@ -140,17 +189,19 @@
                     <div>
                         <h4 class="font-bold text-lg mb-2">Data to Collect</h4>
                         <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li><strong>Time on Task:</strong> Time taken to add a new item.</li>
                             <li><strong>Completion Rate:</strong> Success/Failure per task.</li>
                             <li><strong>SEQ:</strong> Rated 1-7 after each task.</li>
-                            <li><strong>SUS Score:</strong> Overall usability score.</li>
+                            <li><strong>SUS Score:</strong> 10-item standard questionnaire.</li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="font-bold text-lg mb-2">Methods</h4>
+                        <p class="text-gray-600 mb-2">Participants completed a 7-section MS Form:</p>
                         <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li><strong>Task-Based Usability Testing:</strong> See scenarios below.</li>
-                            <li><strong>Standardized Questionnaires:</strong> System Usability Scale (SUS).</li>
+                            <li><strong>Sections 1-2:</strong> Consent & Demographics.</li>
+                            <li><strong>Sections 3-5:</strong> Task execution & Rating (1-7).</li>
+                            <li><strong>Section 6:</strong> System Usability Scale (SUS).</li>
+                            <li><strong>Section 7:</strong> Preference & Satisfaction.</li>
                         </ul>
                     </div>
                 </div>
@@ -159,19 +210,21 @@
                     <h4 class="font-bold text-lg mb-4">Core Tasks & Scenarios</h4>
                     <div class="space-y-6">
                         <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
-                            <h5 class="font-bold mb-2">1. Create 1 Item & Find it</h5>
+                            <h5 class="font-bold mb-2">1. Create 1 Item & Find It</h5>
                             <p class="text-gray-600 italic text-sm mb-2">
                                 "Imagine you just bought a new shirt for €20. Take a photo of it (or use a placeholder) and add it to your closet with today's purchase date. Once you are done, find that new shirt in your main Closet list to make sure it saved."
                             </p>
                         </div>
+                        
                         <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
-                            <h5 class="font-bold mb-2">2. Increase Wear Count & Edit Item</h5>
+                            <h5 class="font-bold mb-2">2. Increase Wear Count</h5>
                             <p class="text-gray-600 italic text-sm mb-2">
-                                "You just wore your 'Green Shirt' again, so please increase its wear count by 1. Afterward, you realized you actually paid a different price for it. Find the Edit screen and change the price to €25."
+                                "You just wore your 'Green Shirt' again, so please increase its wear count by 1."
                             </p>
                         </div>
+
                         <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
-                            <h5 class="font-bold mb-2">3. Manage Outfits (Create, Edit, Delete)</h5>
+                            <h5 class="font-bold mb-2">3. Create Outfit & Modify</h5>
                             <p class="text-gray-600 italic text-sm mb-2">
                                 "You are planning a look for tomorrow. Create a new collection named 'Date Night' and add two items to it. After creating it, decide that one item doesn't look right and remove it from the collection."
                             </p>
@@ -180,7 +233,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="mb-24">
                 <h3 class="text-2xl font-bold mb-6">Heuristic Evaluation (Nielsen)</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -264,6 +317,97 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <div class="mt-12 border-t border-black pt-12">
+                <h3 class="text-2xl font-bold mb-6">User Test Results (Pilot)</h3>
+            
+                <div class="mb-8">
+                    <h4 class="font-bold text-lg mb-2">Demographics (N=5)</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        We tested with 5 participants. 60% of participants were aged 18-21. 
+                        Crucially, 100% admitted to having unworn items in their wardrobe, validating our core problem statement.
+                    </p>
+                </div>
+            
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div class="bg-gray-900 text-white p-6 rounded-lg flex flex-col justify-between">
+                        <div>
+                            <h5 class="text-sm uppercase tracking-widest text-gray-400 mb-2">SUS Score</h5>
+                            <div class="text-5xl font-bold mb-2">95.0</div>
+                            <div class="text-green-400 font-semibold text-lg">Grade: A+ (Excellent)</div>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-4 border-t border-gray-700 pt-4">
+                            "Best Imaginable." Users found the app highly usable despite minor specific heuristic issues.
+                        </p>
+                    </div>
+            
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
+                         <h5 class="font-bold mb-4">Task Difficulty Ratings</h5>
+                         <p class="text-xs text-gray-500 mb-4">(Scale 1-7, where 7 is "Very Difficult")</p>
+                         <ul class="space-y-4">
+                            <li class="flex justify-between items-center">
+                                <span class="text-gray-600">Task 1 (Create Item)</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-500" style="width: 65%"></div>
+                                    </div>
+                                    <span class="font-bold font-mono">4.60</span>
+                                </div>
+                            </li>
+                             <li class="flex justify-between items-center">
+                                <span class="text-gray-600">Task 2 (Wear Count)</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-500" style="width: 62%"></div>
+                                    </div>
+                                    <span class="font-bold font-mono">4.40</span>
+                                </div>
+                            </li>
+                             <li class="flex justify-between items-center">
+                                <span class="text-gray-600">Task 3 (Outfits)</span>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-500" style="width: 62%"></div>
+                                    </div>
+                                    <span class="font-bold font-mono">4.40</span>
+                                </div>
+                            </li>
+                         </ul>
+                    </div>
+                </div>
+            
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Participant Notes</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-3">
+                        <li>"Wearcount bit hard" </li>
+                        <li>"Im wearing this today button in detail above insights" </li>
+                        <li>"Split task 2 so its not as confusing" </li>
+                        <li>"Too long of a task [Task 3]" </li>
+                        <li>"In outfits u cant see that u increased wearcount" </li>
+                        <li>"Add stars to the required inputs in add item" </li>
+                        <li>"Move wearcount in template edit up" </li>
+                        <li>"Link sustainability score to stats page" </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20 border-t border-black pt-8">
+            <h2 class="text-sm font-bold uppercase tracking-widest mb-6">Final Reflection</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-2">Flo Madner</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Working in a team isn't always easy as we faced some challenges along the way, but we persevered and managed to put together a project we can be proud of. My main contribution was focusing on the sorting logic and the UI details. The app exceeded my expectations, as we were able to not only implement what we planned but also add to it.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-2">Kadim Hüseyin Öksüm</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        I had a great time, it was not always easy. But I wanted to have a finished product at the end of the project and I think we delivered on that. My proudest part where I put my most effort in, would propably be the stats page and the score logic. In conclusion we had fun and there are little to no regrets. 
+                    </p>
                 </div>
             </div>
         </section>

@@ -48,7 +48,5 @@ class TemplateRepository(private val templateDao: TemplateDao) {
         templateDao.removeItemFromTemplate(templateId, itemId)
     }
 
-
-
     suspend fun getTemplateWithItems(templateId: Int) = templateDao.getTemplateWithItems(templateId)
 }

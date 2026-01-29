@@ -63,7 +63,7 @@ fun AddImage(
 ) {
     var showImageSelector by remember { mutableStateOf(false) }
 
-    // Styling Variablen
+
     val shape = RoundedCornerShape(16.dp)
     val backgroundColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
     val borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f)
@@ -71,7 +71,7 @@ fun AddImage(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(260.dp) // Feste Höhe macht es zu einem klaren UI-Block
+            .height(260.dp)
             .padding(4.dp)
             .clip(shape)
             .background(backgroundColor)
@@ -103,7 +103,7 @@ fun AddImage(
                 )
             }
         } else {
-            // --- ZUSTAND: BILD VORHANDEN ---
+
             Box(modifier = Modifier.fillMaxSize()) {
                 AsyncImage(
                     model = photoUri,
@@ -112,7 +112,7 @@ fun AddImage(
                     contentScale = ContentScale.Crop
                 )
 
-                // Dunkler Verlauf unten, damit man Icons besser sieht (optional)
+
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -124,7 +124,7 @@ fun AddImage(
                         )
                 )
 
-                // Löschen Button (Oben Rechts)
+
                 IconButton(
                     onClick = { onUriChange("") },
                     modifier = Modifier
@@ -139,7 +139,7 @@ fun AddImage(
                     )
                 }
 
-                // Bearbeiten Hinweis (Unten Rechts) - Das macht es "obvious"
+
                 Box(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)

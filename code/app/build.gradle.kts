@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.foundation.layout)
     implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
     // room setup
     val room_version = "2.8.3"
     implementation("androidx.room:room-ktx:$room_version")

@@ -22,20 +22,20 @@ fun HeaderText(text: String){
 }
 
 @Composable
-fun MidTitle(title: String, onViewAllClick: () -> Unit) { // 1. Add the click function here
+fun MidTitle(title: String, onViewAllClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Your Title
+
         Text(
             text = title,
-            // style = MaterialTheme.typography.titleMedium (Optional: makes it look like a header)
+
         )
 
-        // The "View All" Button
+
         TextButton(onClick = onViewAllClick) {
             Text(text = "View All")
         }
