@@ -34,16 +34,26 @@ fun HomeScreen(
 ) {
     val itemsList by itemViewModel.repository.items.collectAsState(initial = emptyList())
     val currentScore by scoreViewModel.score.collectAsState()
-    ItemGrid(navController, itemsList, currentScore)
+    ItemGrid(navController, itemsList, currentScore, paddingValues)
 }
 
 @Composable
-fun ItemGrid(navController: NavController, itemsList: List<Item>, currentScore: Int) {
+fun ItemGrid(
+    navController: NavController,
+    itemsList: List<Item>,
+    currentScore: Int,
+    paddingValues: PaddingValues
+) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 128.dp),
         horizontalArrangement = Arrangement.spacedBy(24.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(16.dp)
+        contentPadding = PaddingValues(
+            top = paddingValues.calculateTopPadding() + 16.dp,
+            bottom = paddingValues.calculateBottomPadding() + 16.dp,
+            start = 16.dp,
+            end = 16.dp
+        )
     ) {
         val mostWornItems = itemsList.sortedByDescending { it.wearCount }.take(2)
         val leastWornItems = itemsList.sortedBy { it.wearCount }.take(2)
@@ -60,7 +70,7 @@ fun ItemGrid(navController: NavController, itemsList: List<Item>, currentScore: 
         }
         items(mostWornItems) { item ->
             ItemCard(item = item,
-                onClick = {navController.navigate("${Screen.ItemDetail.route}/${item.id}")})
+                onClick = { navController.navigate("${Screen.ItemDetail.route}/${item.id}") })
         }
         item(span = { GridItemSpan(maxLineSpan) }) {
             MidTitle("Your Least Worn",
@@ -70,7 +80,7 @@ fun ItemGrid(navController: NavController, itemsList: List<Item>, currentScore: 
         }
         items(leastWornItems) { item ->
             ItemCard(item = item,
-                onClick = {navController.navigate("${Screen.ItemDetail.route}/${item.id}")})
+                onClick = { navController.navigate("${Screen.ItemDetail.route}/${item.id}") })
         }
     }
 }

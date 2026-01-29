@@ -2,10 +2,10 @@ package com.example.closetscore.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -18,7 +18,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -44,17 +43,25 @@ fun OutfitsScreen(
 ) {
     val templatesList by templateViewModel.templatesWithItems.collectAsState()
 
-    Scaffold { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) {
+    LazyVerticalGrid(
+        modifier = Modifier.fillMaxSize(),
+        columns = GridCells.Adaptive(minSize = 128.dp),
+        horizontalArrangement = Arrangement.spacedBy(24.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
+
+        contentPadding = PaddingValues(
+            top = paddingValues.calculateTopPadding() + 16.dp,
+            bottom = paddingValues.calculateBottomPadding() + 16.dp,
+            start = 16.dp,
+            end = 16.dp
+        )
+    ) {
+
+        item(span = { GridItemSpan(maxLineSpan) }) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .offset(y = (-8).dp)
+                    .offset(y = (-5).dp)
             ) {
                 Box(modifier = Modifier.align(Alignment.CenterStart)) {
                     HeaderText("Your Outfits")
@@ -72,12 +79,14 @@ fun OutfitsScreen(
                     Icon(Icons.Default.Add, contentDescription = "Create outfit")
                 }
             }
+        }
 
-            if (templatesList.isEmpty()) {
+        if (templatesList.isEmpty()) {
+            item(span = { GridItemSpan(maxLineSpan) }) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f),
+                        .height(200.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -86,25 +95,17 @@ fun OutfitsScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-            } else {
-                LazyVerticalGrid(
-                    modifier = Modifier.weight(1f),
-                    columns = GridCells.Adaptive(minSize = 128.dp),
-                    horizontalArrangement = Arrangement.spacedBy(24.dp),
-                    verticalArrangement = Arrangement.spacedBy(24.dp),
-                    contentPadding = PaddingValues(16.dp)
-
-                ) {
-                    items(templatesList, span = { GridItemSpan(maxLineSpan) }) { templateWithItems ->
-                        TemplateCard(
-                            templateWithItems = templateWithItems,
-                            onClick = {
-                                navController.navigate("${Screen.TemplateDetail.route}/${templateWithItems.template.id}")
-                            }
-                        )
-                    }
-                }
             }
+        }
+
+
+        items(templatesList, span = { GridItemSpan(maxLineSpan) }) { templateWithItems ->
+            TemplateCard(
+                templateWithItems = templateWithItems,
+                onClick = {
+                    navController.navigate("${Screen.TemplateDetail.route}/${templateWithItems.template.id}")
+                }
+            )
         }
     }
 }

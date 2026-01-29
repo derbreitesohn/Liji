@@ -56,13 +56,14 @@ enum class SortOption {
 @Composable
 fun ClosetScreen(navController: NavController, text: String, paddingValues: PaddingValues) {
     val viewModel: ItemViewModel = viewModel(factory = AppViewModelProvider.Factory)
-    ClosetGrid(navController, viewModel)
+    ClosetGrid(navController, viewModel, paddingValues)
 }
 
 @Composable
 fun ClosetGrid(
     navController: NavController,
-    itemViewModel: ItemViewModel
+    itemViewModel: ItemViewModel,
+    paddingValues: PaddingValues
 ) {
     val searchState = remember { TextFieldState() }
     val searchResults by itemViewModel.searchResults.collectAsState()
@@ -90,7 +91,6 @@ fun ClosetGrid(
             SortOption.PRICE_HIGH -> categoryFilteredList.sortedByDescending { it.price }
             SortOption.PRICE_LOW -> categoryFilteredList.sortedBy { it.price }
             SortOption.DEFAULT -> categoryFilteredList
-
         }
     }
 
@@ -99,7 +99,12 @@ fun ClosetGrid(
             columns = GridCells.Adaptive(minSize = 128.dp),
             horizontalArrangement = Arrangement.spacedBy(24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp),
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(
+                top = paddingValues.calculateTopPadding() + 16.dp,
+                bottom = paddingValues.calculateBottomPadding() + 16.dp,
+                start = 16.dp,
+                end = 16.dp
+            ),
             modifier = Modifier.weight(1f)
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) {
@@ -284,7 +289,7 @@ fun ClosetGrid(
                     val isAccessorySelected = selectedCategory == ItemCategory.Accessory
                     Button(
                         onClick = {
-                            selectedCategory = if (isOuterwearSelected) null else ItemCategory.Accessory
+                            selectedCategory = if (isAccessorySelected) null else ItemCategory.Accessory
                         },
                         shape = RoundedCornerShape(50),
                         colors = ButtonDefaults.buttonColors(
@@ -302,7 +307,7 @@ fun ClosetGrid(
                         Text(text = "Accessories")
                     }
                 }
-                }
+            }
 
             items(
                 items = itemsDisplay,
